@@ -1,0 +1,19 @@
+stages:
+  - build
+  - deploy
+image : node
+
+before_script:
+  - gcloud auth activate-service-account --key-file=${KEY}
+
+build:
+  stage: build
+  script:
+    - gcloud builds submit --tag gcr.io/adhkar/adhkar
+
+deploy:
+  stage: deploy
+  script:
+    - gcloud beta run deploy --image gcr.io/adhkar/adhkar
+
+
