@@ -20,6 +20,6 @@ deploy:
   script:
     - gcloud components install beta
     - gcloud components update
-    - gcloud beta run deploy --image gcr.io/adhkar/adhkar --region europe-west1-b
+    - gcloud beta run deploy adhkar --image gcr.io/adhkar/adhkar --region us-central1
 
 
