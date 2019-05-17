@@ -18,6 +18,8 @@ build:
 deploy:
   stage: deploy
   script:
+    - gcloud components install beta
+    - gcloud components update
     - gcloud beta run deploy --image gcr.io/adhkar/adhkar
 
 
