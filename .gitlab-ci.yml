@@ -1,7 +1,9 @@
+image : google/cloud-sdk:alpine
+
 stages:
   - build
   - deploy
-image : node
+
 
 before_script:
   - gcloud auth activate-service-account --key-file=${KEY}
