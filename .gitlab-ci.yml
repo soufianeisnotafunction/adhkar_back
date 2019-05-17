@@ -8,6 +8,7 @@ stages:
 before_script:
   - echo $KEY > /tmp/$CI_PIPELINE_ID.json
   - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+  - gcloud config set project adhkar
 
 build:
   stage: build
