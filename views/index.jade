@@ -1,12 +1,9 @@
 extends layout
 
 block content
-  .ui.grid.container
-    h1.four.wide.column #{title}
+  .container
+    h1 #{title}
     p= subtitle
-    .row
-      button(class="ui secondary button four wide column")
-        a(href="/matin") Invocations du matin
-      button(class="ui secondary button four wide column") 
-        a(href='/soir') Invocations du soir
+    a(href="/matin" class="btn btn-primary btn-lg") Invocations du matin
+    a(href='/soir' class="btn btn-dark btn-lg") Invocations du soir
   
