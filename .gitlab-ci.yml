@@ -20,6 +20,6 @@ build:
 deploy:
   stage: deploy
   script:
-    - gcloud beta run deploy adhkar --image gcr.io/adhkar/adhkar --region europe-west1
+    - gcloud beta run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1
 
 
