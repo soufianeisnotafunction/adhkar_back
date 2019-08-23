@@ -3,12 +3,12 @@ extends layout
 block content
   .container
     div(class="row align-items-center d-flex justify-content-center" style="height: 100vh")
-      div.text
+      .title
         h1 #{title}
         h3= subtitle
-      .buttons
+      .buttons.col
         a(href="/matin" class="btn btn-primary lg col-sm-12  pt-5 pb-5")
           h1 Invocations du matin
         a(href='/soir' class="btn btn-dark btn-lg col-sm-12 mt-5 pt-5 pb-5") 
           h1 Invocations du soir
-    
+
