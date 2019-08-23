@@ -2,10 +2,12 @@ extends layout
 
 block content
   .container
-    h1 #{title}
-    h3= subtitle
-    a(href="/matin" class="btn btn-primary lg col-sm-12 mt-5 pt-5 pb-5")
-      h1 Invocations du matin
-    a(href='/soir' class="btn btn-dark btn-lg col-sm-12 mt-5 pt-5 pb-5") 
-      h1 Invocations du soir
-  
+    div(class="row align-items-center d-flex justify-content-center" style="height: 100vh")
+      h1 #{title}
+      h3= subtitle
+      .buttons
+        a(href="/matin" class="btn btn-primary lg col-sm-12  pt-5 pb-5")
+          h1 Invocations du matin
+        a(href='/soir' class="btn btn-dark btn-lg col-sm-12 mt-5 pt-5 pb-5") 
+          h1 Invocations du soir
+    
