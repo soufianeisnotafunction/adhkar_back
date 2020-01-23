@@ -4,19 +4,19 @@ stages:
   - build
   - deploy
 
-before_script:
-  - echo $KEY > /tmp/$CI_PIPELINE_ID.json
-  - gcloud auth activate-service-account --key-file=/tmp/$CI_PIPELINE_ID.json
-  - gcloud config set project adhkar
+default:
+  before_script:
+    - echo $KEY > /tmp/$CI_PIPELINE_ID.json
+    - gcloud auth activate-service-account --key-file=/tmp/$CI_PIPELINE_ID.json
 
 build:
   stage: build
   script:
-    - gcloud builds submit --tag gcr.io/adhkar/adhkar
+    - gcloud builds submit --tag gcr.io/adhkar/adhkar --project=adhkar
 
 deploy:
   stage: deploy
   script:
-    - gcloud run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1
+    - gcloud run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1 --project=adhkar
 
 
