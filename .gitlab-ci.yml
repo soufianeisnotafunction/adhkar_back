@@ -1,10 +1,9 @@
-image : google/cloud-sdk:alpine
-
 stages:
   - build
   - deploy
 
 default:
+  image : google/cloud-sdk:alpine
   before_script:
     - echo $KEY > /tmp/$CI_PIPELINE_ID.json
     - gcloud auth activate-service-account --key-file=/tmp/$CI_PIPELINE_ID.json
