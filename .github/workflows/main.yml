@@ -12,29 +12,29 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: google/cloud-sdk:alpine
+  setup-build-deploy:
+    name: Setup, Build, and Deploy
+    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Get the service account key
-      run: |
-        echo $KEY > /tmp/$CI_PIPELINE_ID.json
-        gcloud auth activate-service-account --key-file=/tmp/$CI_PIPELINE_ID.json
-  
-  deploy:
-    runs-on: google/cloud-sdk:alpine
-    steps:
-      - uses: actions/checkout@v2
-      - name : deploy to cloudrun
-        run: gcloud run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1 --project=adhkar
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '290.0.1'
+        service_account_key: ${{ secrets.KEY }}
+        project_id: adhkar
 
+    # Build and push image to Google Container Registry
+    - name: Build
+      run: gcloud builds submit --tag gcr.io/adhkar/adhkar --project=adhkar
+    # Deploy image to Cloud Run
+    - name: Deploy
+      run: gcloud run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1 --project=adhkar --allow-unauthenticated
+
+          
 
     
     
