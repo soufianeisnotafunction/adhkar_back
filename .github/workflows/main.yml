@@ -25,14 +25,14 @@ jobs:
       with:
         version: '290.0.1'
         service_account_key: ${{ secrets.KEY }}
-        project_id: adhkar
+        project_id: ${{ secrets.PROJECT_ID }}
 
     # Build and push image to Google Container Registry
     - name: Build
-      run: gcloud builds submit --tag gcr.io/adhkar/adhkar --project=adhkar
+      run: gcloud builds submit --tag gcr.io/${{ secrets.PROJECT_ID }}/adhkar --project=${{ secrets.PROJECT_ID }}
     # Deploy image to Cloud Run
     - name: Deploy
-      run: gcloud run deploy adhkar --image gcr.io/adhkar/adhkar --platform managed --region europe-west1 --project=adhkar --allow-unauthenticated
+      run: gcloud run deploy adhkar --image gcr.io/${{ secrets.PROJECT_ID }}/adhkar --platform managed --region europe-west1 --project=${{ secrets.PROJECT_ID }} --allow-unauthenticated
 
           
 
